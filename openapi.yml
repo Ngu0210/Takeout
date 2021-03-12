@@ -1,0 +1,87 @@
+openapi: '3.0.2'
+info:
+  title: API Title
+  version: '1.0'
+servers:
+  - url: http://127.0.0.1:5000/
+
+components:
+  schemas:
+    dish:
+      type: object
+      properties:
+        title:
+          type: string
+        price:
+          type: integer
+        vegetarian:
+          type: boolean
+
+paths:
+  /menu/:
+    get:
+      summary: Gets menu list
+      responses:
+        '200':
+          description: OK
+
+    post:
+      summary: Adds a dish into the menu
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/dish'
+
+      responses:
+        '200':
+          description: OK
+
+  
+  /menu/{id}:
+    get:
+      summary: Get a dish by ID
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: Numeric ID of the user to get
+    
+      responses:
+          '200':
+            description: OK
+
+    put:
+      summary: Updates existing dish
+      requestBody:
+        required: true
+        content: 
+          application/json:
+            schema:
+              $ref: '#/components/schemas/dish'
+      
+      responses:
+        '200':
+          description: OK
+
+    patch:
+      summary: Updates existing dish
+      requestBody:
+        content: 
+          application/json:
+            schema:
+              $ref: '#/components/schemas/dish'
+      
+      responses:
+        '200':
+          description: OK
+
+    delete:
+      summary: Deletes the chosen dish by ID
+      responses:
+        '200':
+          description: OK
+
